@@ -103,6 +103,79 @@
             ]
         },
         {
+            "name": "rpcsvc-proto",
+            "buildsystem": "autotools",
+            "sources": [
+              {
+                "type": "archive",
+                "url": "https://github.com/thkukuk/rpcsvc-proto/releases/download/v1.4.4/rpcsvc-proto-1.4.4.tar.xz",
+                "sha256": "81c3aa27edb5d8a18ef027081ebb984234d5b5860c65bd99d4ac8f03145a558b"
+              }
+            ]
+          },
+            {
+            "name": "parse-yapp",
+            "buildsystem": "simple",
+            "build-commands": [
+                "perl Makefile.PL",
+                "make install"
+            ],
+            "build-options": {
+                "env": {
+                "PERL5LIB": "/app/lib/perl5/",
+                "PERL_MM_OPT": "INSTALL_BASE=/app"
+                }
+            },
+            "cleanup": [
+                "*"
+            ],
+            "sources": [
+                {
+                "type": "archive",
+                "url": "https://cpan.metacpan.org/authors/id/W/WB/WBRASWELL/Parse-Yapp-1.21.tar.gz",
+                "sha256": "3810e998308fba2e0f4f26043035032b027ce51ce5c8a52a8b8e340ca65f13e5"
+                }
+            ]
+            },
+        {
+            "name": "samba",
+            "buildsystem": "autotools",
+            "build-options": {
+                "env": {
+                    "PERL5LIB": "/app/lib/perl5/",
+                    "PERL_MM_OPT": "INSTALL_BASE=/app"
+                }
+            },
+            "config-opts": [
+                "--prefix=/app",
+                "--sbindir=/app/bin",
+                "--libdir=/app/lib",
+                "--enable-fhs",
+                "--disable-python",
+                "--without-json",
+                "--without-ad-dc",
+                "--without-ads",
+                "--without-pam",
+                "--without-ldap",
+                "--without-acl-support",
+                "--without-systemd",
+                "--without-ldb-lmdb"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.samba.org/pub/samba/stable/samba-4.22.0.tar.gz",
+                    "sha256": "b39242e1ac1f5469e634c94b2e472045e5060975c2dd6c4cdcdfce0c5586cd76",
+                    "x-checker-data": {
+                        "type": "html",
+                        "url": "https://download.samba.org/pub/samba/stable/",
+                        "pattern": "samba-([\\d.]+)\\.tar\\.gz",
+                        "sort-version": true
+                    }
+                }
+            ]
+        },
+        {
             "name": "vulkan-tools",
             "buildsystem": "cmake-ninja",
             "config-opts": [
